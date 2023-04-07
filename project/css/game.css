@@ -1,0 +1,138 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.boddy {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: blue;
+}
+
+.game-board {
+    width: 80%;
+    height: 500px;
+    border-bottom: 15px solid #01e01f;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(#87CEEB, #E0F6FF);
+}
+
+.clouds {
+    position: absolute;
+    bottom: 50;
+    width: 300px;
+    animation: pipe-animation 10s infinite linear;
+}
+
+.clouds2 {
+    position: absolute;
+    bottom: 50;
+    width: 300px;
+    background-position: left center;
+    animation: pipe-animation 8s infinite linear;
+}
+
+.clouds3 {
+    position: absolute;
+    bottom: 50;
+    width: 300px;
+    object-position: 10%;
+    animation: pipe-animation 6s infinite linear;
+}
+
+.clouds4 {
+    position: absolute; 
+    bottom: 50;
+    width: 300px;
+    height: 300px;
+    animation: pipe-animation 7s infinite linear;
+}
+
+
+.pipe {
+    position: absolute;
+    bottom: 0;
+    width: 80px;
+    animation: pipe-animation 2s infinite linear;
+}
+
+@keyframes pipe-animation {
+
+    from {
+        right: -80px;
+    }
+    to {
+        right: 100%;
+    }
+
+}
+
+.mario{
+    width: 135px;
+    position: absolute;
+    bottom: 0%;
+}
+
+.jump{
+    animation: jump 500ms ease-out;
+}
+
+@keyframes jump {
+    0% {
+        bottom: 0;
+    }
+
+    10% {
+        bottom: 50px;
+    }
+
+    20% {
+        bottom: 100px;
+    }
+
+    40% {
+        bottom: 180px;
+    }
+
+    50% {
+        bottom: 180px;
+    }
+
+    60% {
+        bottom: 180px;
+    }
+
+    80% {
+        bottom: 100px;
+    }
+
+    90% {
+        bottom: 50px;
+    }
+
+    100% {
+        bottom: 0;
+    }
+}
+.score {
+    background-color: transparent;
+    width: 10%;
+    margin: 0 auto;
+    position: relative;
+    display: block;
+    
+}
+
+.score h1 {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-family: "Great Vibes", cursive;
+    text-shadow: 0 1px 1px #fff;
+}

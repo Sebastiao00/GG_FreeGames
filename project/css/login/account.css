@@ -1,0 +1,166 @@
+/* LINK PARA BOX-SHADOW: https://getcssscan.com/css-box-shadow-examples */
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+:root {
+    --branco: #fff;
+    --fundo-rosa-escuro: #c44569;
+    --preto-acizentado: #1c1c1c;
+}
+
+body {
+    background: #000000;
+    font-family: "Roboto", sans-serif;
+}
+
+/* ROXOS: #9b59b6 - ametist | #8e44ad -  */
+/* ROSA: #b33771 | #c44569*/
+/* Preto #2c3a47 */
+.container {
+    background: #3d3b3b;
+    margin: 20px auto;
+    border-radius: 20px;
+    padding: 64px;
+    color: var(--preto-acizentado);
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    width: 30%;
+    min-width: 400px;
+}
+
+.perfil {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    margin-top: -40px;
+}
+
+.perfil-foto {
+    border-radius: 100%;
+    max-width: 30%;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.titulo {
+    margin-top: 5px;
+}
+
+.titulo h1 {
+    font-weight: 700;
+    font-size: 36px;
+    margin: 3px;
+}
+
+.titulo h3 {
+    font-weight: 400;
+    font-size: 24px;
+    margin: 3px;
+}
+
+.tema button {
+    align-self: flex-end;
+    font-size: 18px;
+    font-weight: 400;
+    background: var(--rosa);
+    color: white;
+    border-radius: 5px;
+    border: 1px solid #b33771;
+}
+
+.projetos {
+    display: flex;
+    flex-direction: column;
+    backdrop-filter: blur();
+    background: rgba(255, 255, 255, 0.4);
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px;
+
+    min-width: 300px;
+}
+
+.projetos-titulo {
+    list-style: none;
+    font-weight: 700;
+    font-size: 24px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    padding: 0;
+}
+
+.projetos-item a {
+    text-decoration: none;
+    color: black;
+}
+
+.projetos-item {
+    list-style-type: none;
+
+    line-height: 36px;
+    margin-left: 10px;
+
+    font-weight: 400;
+    font-size: 18px;
+
+    padding: 5px;
+    box-sizing: border-box;
+    display: block;
+}
+
+.dark {}
+
+.dark .container {
+    background: #333439;
+    color: #f6f6f6;
+}
+
+.insignias {
+    backdrop-filter: blur();
+    background: rgba(255, 255, 255, 0.4);
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.insignias p {
+    font-size: 25px;
+}
+
+.redes-sociais {
+    backdrop-filter: blur();
+    background: rgba(255, 255, 255, 0.4);
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.redes-sociais a img {
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+}
+
+summary {
+    cursor: pointer;
+}
+
+li :hover {
+    cursor: pointer;
+    color: var(--preto-acizentado);
+    background-color: #b33771;
+    box-sizing: border-box;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.redes-sociais a:hover {
+    transform: scale(1.5);
+}
