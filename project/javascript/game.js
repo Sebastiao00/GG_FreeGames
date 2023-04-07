@@ -4,10 +4,9 @@ const clouds = document.querySelector('.clouds');
 const clouds2 = document.querySelector('.clouds2');
 const clouds3 = document.querySelector('.clouds3');
 const clouds4 = document.querySelector('.clouds4');
-const scoredisplay = 0; 
 let score = 0;
 let scored = false;
-
+const scoredisplay = document.getElementById('scoreboard');
 
 const jump = () => {
     mario.classList.add('jump');
@@ -33,9 +32,8 @@ const loop = setInterval(() => {
 
         score++;
         console.log(score);
-        scored = true;
         scoredisplay.textContent = score;
-        scoredisplay = document.getElementById('scoreboard');
+        scored = true;
         
     }
 
@@ -67,13 +65,12 @@ const loop = setInterval(() => {
         mario.style.animation = 'none'; 
         mario.style.bottom =`${marioposition}px`;
 
-        mario.src = src='../images/game/gameover.png';
+        mario.src = './../../images/game/gameover.png';
         mario.style.width = '75px';
         mario.style.marginLeft = '20px';
 
         clearInterval(loop);
 
-        const scoredisplay = document.getElementById('scoreboard');
         scoredisplay.textContent = score;
 
         setTimeout(() =>{
