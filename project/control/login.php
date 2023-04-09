@@ -19,7 +19,7 @@ if (isset($_POST['bt_rigister'])) {
 
 
     // perform validation
-    if (!preg_match("/^[a-zA-Z ]*$/", $rg_username)) {
+    if (!preg_match("/^[a-zA-Z ]*$/", $rg_name)) {
         $f_NameErr = '<div class="alert alert-danger">
                            Només es permeten lletres i espais en blanc.
                         </div>';
@@ -41,17 +41,14 @@ if (isset($_POST['bt_rigister'])) {
                         </div>';
     }
 
-    // Generate random activation token
-    $token = md5(rand() . time());
-
     // Password hash
     $password_hash = password_hash($rg_pass1, PASSWORD_BCRYPT);
 
     // Store the data in db, if all the preg_match condition met
-    if (empty($f_NameErr) && empty($l_NameErr) && empty($_emailErr) && empty($_mobileErr) && empty($_passwordErr)) {
+    if (empty($f_NameErr) && empty($l_NameErr) && empty($_emailErr) && empty($_passwordErr)) {
 
-        $sql2 = "INSERT INTO utilizadores (ut_email, ut_, email, mobilenumber, password, token, is_active, date_time, number1)
-                VALUES ('$first', '$last','$email', '$number2', '$password_hash', '$token', '1', now(), $admin )";
+        $sql2 = "INSERT INTO utilizadores (ut_email, ut_first, ut_pass, ut_last)
+                VALUES ('$rg_email', '$rg_name','$password_hash', '$rg_last')";
 
         $result2 = mysqli_query($connection, $sql2);
 

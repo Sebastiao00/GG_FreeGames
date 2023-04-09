@@ -33,9 +33,6 @@
         <label for="password">Password</label>
         <input type="password" placeholder="Password" id="rg_pass1">
 
-        <label for="password">Confirm Password </label>
-        <input type="password" placeholder="Password" id="rg_pass2">
-
         <button id="bt_rigister">Rigister</button>
     </form>
 </body>
