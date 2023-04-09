@@ -17,11 +17,11 @@
     </head>
     <body>
         <!-- Header-->
-        <header class="bg-dark py-5">
+        <header class="bg-dark py-5" style="background-image: url('../images/background.jpg'); background-size: cover;">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
                     <h1 class="display-4 fw-bolder">GG-FreeGames</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">Play with Friends</p>
+                    <p class="lead fw-normal text-black-50 mb-0">Play with Friends</p>
                 </div>
             </div>
         </header>
@@ -54,17 +54,17 @@
                         </div>
                     </div>
                     
-                    <div class="col mb-4">
-                        <div class="card h-100">
+                    
+                    <div class="col mb-5">
+                        <div class="card h-90">
                             <!-- Product image-->
-                            <img class="card-img-top" src="../images/memory_game/game.png" alt="..." />
+                            <img class="card-img-top" with="38.75rem" height="135px" src="../images/memory_game/game.png" alt="..." />
                             <!-- Product details-->
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- Product name-->
                                     <h5 class="fw-bolder">Memory Game</h5>
-                                    <!-- Product reviews-->
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                     <div class="d-flex justify-content-center small text-warning mb-2">
                                         <div class="bi-star-fill"></div>
                                         <div class="bi-star-fill"></div>
                                         <div class="bi-star-fill"></div>
