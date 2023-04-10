@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/login/account.css">
+    <link rel="stylesheet" href="../css/styles.css">
     <meta charset="UTF-8">
     <title>CodePen - Glassmorphism login Form Tutorial in html css</title>
     <script>
@@ -15,7 +16,9 @@
             document.body.classList.toggle("dark");
         }
     </script>
-</head>
+
+    <!--Include Navbar -->
+    <?php include('./navbar.php'); ?></head>
 <body>
   <div class="container">
     <header class="perfil">
