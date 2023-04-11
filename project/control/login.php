@@ -1,8 +1,8 @@
 <?php
 // Database connection
-include('./control/database.php');
+include('../db/database.php');
 
-$sql = "SELECT ut_id, , ut_email, ut_username, ut_pass, ut_pass2 FROM utilizadores ORDER BY id ASC";
+$sql = "SELECT ut_id, , ut_email, ut_first, ut_last, ut_pass, ut_admin FROM utilizadores ORDER BY ut_id ASC";
 $result = $connection->query($sql);
 
 if (isset($_POST['bt_rigister'])) {
@@ -11,7 +11,6 @@ if (isset($_POST['bt_rigister'])) {
     $rg_last = $_POST['rg_last'];
     $rg_email = $_POST['rg_email'];
     $rg_pass1 = $_POST['rg_pass1'];
-    $rg_pass2 = $_POST['rg_pass2'];
 
     // check if email already exist
     $email_check_query = mysqli_query($connection, "SELECT * FROM utilizadores WHERE ut_email = '{$rg_email}' ");
@@ -47,8 +46,8 @@ if (isset($_POST['bt_rigister'])) {
     // Store the data in db, if all the preg_match condition met
     if (empty($f_NameErr) && empty($l_NameErr) && empty($_emailErr) && empty($_passwordErr)) {
 
-        $sql2 = "INSERT INTO utilizadores (ut_email, ut_first, ut_pass, ut_last)
-                VALUES ('$rg_email', '$rg_name','$password_hash', '$rg_last')";
+        $sql2 = "INSERT INTO utilizadores (ut_email, ut_first,  ut_last, ut_pass, ut_admin)
+                VALUES ('$rg_email', '$rg_name','$password_hash', '$rg_last', '0')";
 
         $result2 = mysqli_query($connection, $sql2);
 
