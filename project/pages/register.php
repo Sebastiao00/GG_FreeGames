@@ -18,7 +18,7 @@
         <div class="shape"></div>
         <div class="shape"></div>
     </div>
-    <form class="rg_form" method="post" action="../login.php">
+    <form class="rg_form" method="post" >
         <h3>Rigister </h3>
 
         <label for="username">Name</label>
@@ -33,7 +33,7 @@
         <label for="password">Password</label>
         <input type="password" placeholder="Password" id="rg_pass1" required>
 
-        <button id="bt_rigister">Rigister</button>
+        <button id="bt_rigister" type="submit">Rigister</button>
     </form>
 </body>
 </html>
