@@ -9,7 +9,7 @@
 }
 
 body {
-    background: #000000;
+    background: #ffffff;
     font-family: "Roboto", sans-serif;
 }
 
@@ -21,7 +21,7 @@ body {
     margin: 20px auto;
     border-radius: 20px;
     padding: 64px;
-    color: var(--preto-acizentado);
+    color: #ffffff;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     width: 30%;
     min-width: 400px;
@@ -112,7 +112,7 @@ body {
 .dark {}
 
 .dark .container {
-    background: #333439;
+    background: #000000;
     color: #f6f6f6;
 }
 

@@ -19,6 +19,16 @@
         <div class="shape"></div>
     </div>
     <form class="rg_form" method="post" >
+
+    <?php
+/*
+    echo $f_NameErr; 
+    echo $l_NameErr; 
+    echo $_emailErr; 
+    echo $_passwordErr; 
+*/
+    ?>  
+
         <h3>Rigister </h3>
 
         <label for="username">Name</label>
@@ -33,7 +43,7 @@
         <label for="password">Password</label>
         <input type="password" placeholder="Password" id="rg_pass1" required>
 
-        <button id="bt_rigister" type="submit">Rigister</button>
+        <button id="bt_rigister" type="submit" name="bt_rigister">Register</button>
     </form>
 </body>
 </html>

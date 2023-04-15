@@ -20,7 +20,7 @@
                  </li>
              </ul>
              <form class="d-flex" href="./account.php">
-                 <button class="btn btn-outline-light" type="submit" id="account">
+                 <button class="btn btn-outline-light" id="account">
                      <i class="bi bi-person-circle"></i>
                      Account
                  </button>
