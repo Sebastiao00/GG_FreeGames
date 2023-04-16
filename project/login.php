@@ -10,9 +10,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/login/login.css">
-  <?php
-    //include('./control/login.php');
-  ?>
+  <script href="./control/login.js"></script>
 </head>
 
 <body>
@@ -23,8 +21,8 @@
   <form method="post">
     <h3>Login </h3>
 
-    <label for="username">Username</label>
-    <input type="text" placeholder="Email" id="username" required>
+    <label for="email">Email</label>
+    <input type="text" placeholder="email" id="email" required>
 
     <label for="password">Password</label>
     <input type="password" placeholder="Password" id="password" required>
