@@ -5,12 +5,12 @@ include("../db/database.php");
 
 // Rigister System
 // Verifica se o formulário foi submetido
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["register"])) {
+if (isset($_POST['bt_rigister'])) {
     // Coleta as informações do formulário
-    $f_Name = trim($_POST["f_Name"]);
-    $l_Name = trim($_POST["l_Name"]);
-    $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
-    $password = trim($_POST["password"]);
+    $f_Name = $_POST["rg_name"];
+    $l_Name = $_POST["rg_last"];
+    $email = filter_var($_POST["rg_email"], FILTER_SANITIZE_EMAIL);
+    $password = $_POST["rg_pass1"];
 
     // Verifica se todos os campos foram preenchidos
     if (empty($f_Name) || empty($l_Name) || empty($email) || empty($password)) {
@@ -69,10 +69,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["register"])) {
         echo "Erro ao registrar usuário: " . $stmt->error;
         exit;
     }
-
-    // Feche a consulta preparada e a conexão com o banco de dados
-    $stmt->close();
-    $conn->close();
 }
 
 // Login System
@@ -88,4 +84,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["login"])) {
         exit;
     }
 }
+
 ?>
