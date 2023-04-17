@@ -7,15 +7,11 @@ ob_start();
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
+// Conexão com o banco de dados
+$conn = mysqli_connect("localhost", "root", "", "project");
 
-$hostname = "localhost";
-$username = "root";
-$password = "";
-$dbname = "project";
-
-$connection = mysqli_connect($hostname, $username, $password, $dbname);
-
-if (!$connection) {
-    die("Database connection failed: " . mysqli_connect_error());
+// Verifica se a conexão foi bem sucedida
+if (!$conn) {
+    die("Falha na conexão: " . mysqli_connect_error());
 }
-?>
+

@@ -1,75 +1,91 @@
 <?php
-// Database connection
-include('../db/database.php');
 
-// Set sessions
-if (!isset($_SESSION)) {
-    session_start();
-}
+// Inclui o arquivo que contém a conexão com o banco de dados
+include("../db/database.php");
 
-if (isset($_POST['bt_rigister'])) {
+// Rigister System
+// Verifica se o formulário foi submetido
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["register"])) {
+    // Coleta as informações do formulário
+    $f_Name = trim($_POST["f_Name"]);
+    $l_Name = trim($_POST["l_Name"]);
+    $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
+    $password = trim($_POST["password"]);
 
-    $rg_name = $_POST['rg_name'];
-    $rg_last = $_POST['rg_last'];
-    $rg_email = $_POST['rg_email'];
-    $rg_pass1 = $_POST['rg_pass1'];
-
-    // check if email already exist
-    $email_check_query = mysqli_query($connection, "SELECT * FROM utilizadores WHERE ut_email = '{$rg_email}' ");
-    $rowCount = mysqli_num_rows($email_check_query);
-
-    // perform validation
-    $f_NameErr = null;
-    $l_NameErr = null;
-    $_emailErr = null;
-    $_passwordErr = null;
-
-    if (!preg_match("/^[a-zA-Z ]*$/", $rg_name)) {
-        $f_NameErr = '<div class="alert alert-danger">
-                           Only letters and white space allowed.
-                        </div>';
+    // Verifica se todos os campos foram preenchidos
+    if (empty($f_Name) || empty($l_Name) || empty($email) || empty($password)) {
+        echo "Por favor, preencha todos os campos.";
+        exit;
     }
 
-    if (!preg_match("/^[a-zA-Z ]*$/", $rg_last)) {
-        $l_NameErr = '<div class="alert alert-danger">
-                           Only letters and white space allowed.
-                        </div>';
+    // Verifica se o email é válido
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo "Endereço de email inválido.";
+        exit;
     }
 
-    if (!filter_var($rg_email, FILTER_VALIDATE_EMAIL)) {
-        $_emailErr = '<div class="alert alert-danger">
-                            Invalid email format.
-                        </div>';
+    // Verifica se a senha tem pelo menos 8 caracteres
+    if (strlen($password) < 8) {
+        echo "A senha deve ter pelo menos 8 caracteres.";
+        exit;
     }
 
-    if (!preg_match("/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,20}$/", $rg_pass1)) {
-        $_passwordErr = '<div class="alert alert-danger">
-                           Password must be between 6 and 20 characters long, contain at least one special character, lowercase, uppercase and a digit.
-                        </div>';
+    // Verifica se o email já está em uso
+    $sql = "SELECT * FROM utilizadores WHERE ut_email = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        echo "Este email já está em uso.";
+        exit;
     }
 
-    // Password hash
-    $password_hash = password_hash($rg_pass1, PASSWORD_BCRYPT);
+    // Hash a senha antes de inseri-la no banco de dados
+    $passhash = password_hash($password, PASSWORD_DEFAULT);
 
-    // Store the data in db, if all the preg_match condition met
-    if (empty($f_NameErr) && empty($l_NameErr) && empty($_emailErr) && empty($_passwordErr)) {
+    // Prepare a query SQL usando prepared statements
+    $sql = "INSERT INTO utilizadores (ut_first, ut_last, ut_email, ut_pass) VALUES (?, ?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ssss", $f_Name, $l_Name, $email, $passhash);
 
-        $sql2 = "INSERT INTO utilizadores (ut_email, ut_first, ut_last, ut_pass, ut_admin)
-                VALUES ('$rg_email', '$rg_name', '$rg_last', '$password_hash', 0)";
+    // Execute a consulta preparada
+    if ($stmt->execute()) {
+        // Inicie a sessão do usuário
+        session_start();
 
-        $result2 = mysqli_query($connection, $sql2);
+        // Defina as variáveis de sessão
+        $_SESSION["ut_id"] = $stmt->insert_id;
+        $_SESSION["ut_email"] = $email;
+        $_SESSION["ut_first"] = $f_Name;
+        $_SESSION["ut_last"] = $l_Name;
 
-        if ($result2) {
-            $success_insert = "<div class='alert alert-success'>
-            Successfully inserted! Click on the 'Check changes' button to see the changes made in the table.
-            </div>";
-            header("Location: index.php");
-        } else {
-            echo "Error: " . $sql2 . "<br>" . mysqli_error($connection);
-        }
+        // Redirecione o usuário para a página de destino
+        header("Location: index.php");
+        exit;
     } else {
-        print("erro");
+        // Exiba uma mensagem de erro
+        echo "Erro ao registrar usuário: " . $stmt->error;
+        exit;
     }
+
+    // Feche a consulta preparada e a conexão com o banco de dados
+    $stmt->close();
+    $conn->close();
 }
 
+// Login System
+// Verifica se o formulário foi submetido
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["login"])) {
+    // Coleta as informações do formulário
+    $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
+    $password = trim($_POST["password"]);
+
+    // Validação de formulário
+    if (empty($email) || empty($password)) {
+        echo "Por favor, preencha todos os campos.";
+        exit;
+    }
+}
 ?>

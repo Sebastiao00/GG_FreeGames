@@ -19,32 +19,31 @@
         <div class="shape"></div>
     </div>
     <form class="rg_form" method="post" >
-
     <?php
-/*
-    echo $f_NameErr; 
-    echo $l_NameErr; 
-    echo $_emailErr; 
-    echo $_passwordErr; 
-*/
-    ?>  
+        if (!empty($error)) {
+            echo "<div class='error-message'>$error</div>";
+        }
+    ?>
 
-        <h3>Rigister </h3>
+        <h3>Register</h3>
 
         <label for="username">Name</label>
-        <input type="text" placeholder="Username" id="rg_name" required>
+        <input type="text" placeholder="First Name" id="rg_name" name="ut_first" required
+            value="<?php echo isset($_POST['ut_first']) ? $_POST['ut_first'] : '' ?>">
 
         <label for="username">Last Name</label>
-        <input type="text" placeholder="Username" id="rg_last" required>
+        <input type="text" placeholder="Last Name" id="rg_last" name="ut_last" required
+            value="<?php echo isset($_POST['ut_last']) ? $_POST['ut_last'] : '' ?>">
 
         <label for="password">Email</label>
-        <input type="text" placeholder="Email" id="rg_email" required>
+        <input type="text" placeholder="Email" id="rg_email" name="ut_email" required
+            value="<?php echo isset($_POST['ut_email']) ? $_POST['ut_email'] : '' ?>">
 
         <label for="password">Password</label>
-        <input type="password" placeholder="Password" id="rg_pass1" required>
+        <input type="password" placeholder="Password" id="rg_pass1" name="ut_pass" required>
 
         <button id="bt_rigister" type="submit" name="bt_rigister">Register</button>
-    </form>
-</body>
+        </form>
+    </body>
 </html>
 
