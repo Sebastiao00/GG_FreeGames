@@ -3,86 +3,142 @@
 // Inclui o arquivo que contém a conexão com o banco de dados
 include("../db/database.php");
 
+// Insert
+global $success_insert, $f_NameErr, $l_NameErr, $_emailErr, $_mobileErr, $_passwordErr;
+global $result, $sql;
+
+
 // Rigister System
 // Verifica se o formulário foi submetido
 if (isset($_POST['bt_rigister'])) {
+
     // Coleta as informações do formulário
+    $admin_nr = 0;
     $f_Name = $_POST["rg_name"];
     $l_Name = $_POST["rg_last"];
     $email = filter_var($_POST["rg_email"], FILTER_SANITIZE_EMAIL);
     $password = $_POST["rg_pass1"];
 
-    // Verifica se todos os campos foram preenchidos
-    if (empty($f_Name) || empty($l_Name) || empty($email) || empty($password)) {
-        echo "Por favor, preencha todos os campos.";
-        exit;
+    // perform validation
+    if (!preg_match("/^[a-zA-Z ]*$/", $f_Name)) {
+        $f_NameErr = '<div class="alert alert-danger">
+                           Només es permeten lletres i espais en blanc.
+                        </div>';
     }
 
-    // Verifica se o email é válido
+    if (!preg_match("/^[a-zA-Z ]*$/", $l_Name)) {
+        $l_NameErr = '<div class="alert alert-danger">
+                           Només es permeten lletres i espais en blanc.
+                        </div>';
+    }
+
+    // Verifica se o endereço de email é válido
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         echo "Endereço de email inválido.";
         exit;
     }
 
-    // Verifica se a senha tem pelo menos 8 caracteres
-    if (strlen($password) < 8) {
-        echo "A senha deve ter pelo menos 8 caracteres.";
-        exit;
+    //verificação da Senha
+    if (!preg_match("/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,20}$/", $password)) {
+        $_passwordErr = '<div class="alert alert-danger">
+                           La contrasenya ha de tenir entre 6 i 20 xarcters de llarg, conté almenys un chacter especial, minúscula, majúscules i un dígit.
+                        </div>';
     }
 
-    // Verifica se o email já está em uso
-    $sql = "SELECT * FROM utilizadores WHERE ut_email = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
 
-    if ($result->num_rows > 0) {
-        echo "Este email já está em uso.";
-        exit;
-    }
+    // Password hash
+    $password_hash = password_hash($password, PASSWORD_BCRYPT);
 
-    // Hash a senha antes de inseri-la no banco de dados
-    $passhash = password_hash($password, PASSWORD_DEFAULT);
+    // Store the data in db, if all the preg_match condition met
+    if (empty($f_NameErr) && empty($l_NameErr) && empty($_emailErr) && empty($_mobileErr) && empty($_passwordErr)) {
 
-    // Prepare a query SQL usando prepared statements
-    $sql = "INSERT INTO utilizadores (ut_first, ut_last, ut_email, ut_pass) VALUES (?, ?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssss", $f_Name, $l_Name, $email, $passhash);
+        $sql = "INSERT INTO utilizadores ( ut_email, ut_first, ut_last, ut_pass, ut_admin)
+                          VALUES ('$email', '$f_Name', '$l_Name', '$password_hash', '0')";
+        $result = $conn->query($sql);
 
-    // Execute a consulta preparada
-    if ($stmt->execute()) {
-        // Inicie a sessão do usuário
-        session_start();
-
-        // Defina as variáveis de sessão
-        $_SESSION["ut_id"] = $stmt->insert_id;
-        $_SESSION["ut_email"] = $email;
-        $_SESSION["ut_first"] = $f_Name;
-        $_SESSION["ut_last"] = $l_Name;
-
-        // Redirecione o usuário para a página de destino
-        header("Location: index.php");
-        exit;
-    } else {
-        // Exiba uma mensagem de erro
-        echo "Erro ao registrar usuário: " . $stmt->error;
-        exit;
+        
+        if ($result) {
+            $success_insert = "<div class='alert alert-success'>
+            Insertado con éxito! Haga clic en el botón 'Verificar cambios' para ver los cambios realizados en la tabla.
+            </div>";
+            header("Location: index.php");
+        } else {
+            echo "Erro: " . $sql . "<br>";
+        }
     }
 }
+
 
 // Login System
 // Verifica se o formulário foi submetido
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["login"])) {
-    // Coleta as informações do formulário
-    $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
-    $password = trim($_POST["password"]);
+if (isset($_POST['bt_login'])) {
 
-    // Validação de formulário
-    if (empty($email) || empty($password)) {
-        echo "Por favor, preencha todos os campos.";
-        exit;
+    $email_signin = $_POST['email'];
+    $password_signin = $_POST['password'];
+
+    // clean data 
+    $user_email = filter_var($email_signin, FILTER_SANITIZE_EMAIL);
+    $pswd = mysqli_real_escape_string($conn, $password_signin);
+
+    // Query if email exists in db
+    $sql = "SELECT * From utilizadores WHERE ut_email = '{$email_signin}' ";
+    $query = mysqli_query($conn, $sql);
+    $rowCount = mysqli_num_rows($query);
+
+    // If query fails, show the reason 
+    if (!$query) {
+        die("SQL query failed: " . mysqli_error($conn));
+    }
+
+    if (!empty($email_signin) && !empty($password_signin)) {
+        if (!preg_match("/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,20}$/", $pswd)) {
+            $wrongPwdErr = '<div class="alert alert-danger">
+                       La contrasenya ha de tenir entre 6 i 20 xarcters de llarg, conté almenys un chacter especial, minúscula, majúscules i un dígit.
+                    </div>';
+        }
+        // Check if email exist
+        if ($rowCount <= 0) {
+            $accountNotExistErr = '<div class="alert alert-danger">
+                        El compte d usuari no existeix.
+                    </div>';
+        } else {
+            // Fetch user data and store in php session
+            while ($row = mysqli_fetch_array($query)) {
+                $id = $row['ut_id'];
+                $email = $row['ut_email'];
+                $firstname = $row['ut_first'];
+                $lastname = $row['ut_last'];
+                $pass_word = $row['ut_pass'];
+                $number = $row['ut_admin'];
+            }
+
+            // Verify password
+            $password = password_verify($password_signin, $pass_word);
+        }
+       if($email_signin == $email && $password_signin == $password ) {
+
+            $_SESSION['ut_id'] = $id;
+            $_SESSION['ut_email'] = $email;
+            $_SESSION['ut_first'] = $firstname;
+            $_SESSION['email'] = $email;
+            $_SESSION['ut_pass'] = $pass_word;
+            $_SESSION['ut_admin'] = $number;
+            
+        header("Location:./index.php");
+                          
+        }
+    } else {
+        if (empty($email_signin)) {
+            $email_empty_err = "<div class='alert alert-danger email_alert'>
+                      No s'ha proporcionat el correu electrònic.
+                    </div>";
+        }
+
+        if (empty($password_signin)) {
+            $pass_empty_err = "<div class='alert alert-danger email_alert'>
+                          No s'ha proporcionat la contrasenya.
+                        </div>";
+        }
     }
 }
-
 ?>

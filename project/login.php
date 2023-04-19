@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <!-- Design by foolishdeveloper.com -->
   <title>Glassmorphism login Form Tutorial in html css</title>

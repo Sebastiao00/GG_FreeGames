@@ -9,7 +9,7 @@ c.fillRect(0, 0, canvas.width, canvas.height);
 class Sprite {
     constructor({ position, velocity }) {
         this.position = position;
-        this.velocity = this.velocity;
+        this.velocity = velocity;
     }
 
     draw() {
@@ -34,6 +34,8 @@ const player = new Sprite({
     }    
 })
 
+player.draw();
+
 const enemy = new Sprite({
     position: {
         x: 400,
@@ -45,6 +47,7 @@ const enemy = new Sprite({
     }
 })
 
+enemy.draw();
 console.log(player);
 
 function animate() {
