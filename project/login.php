@@ -15,6 +15,12 @@
 </head>
 
 <body>
+
+  <?php echo $wrongPwdErr; ?>
+  <?php echo $accountNotExistErr; ?>
+  <?php echo $email_empty_err; ?>
+  <?php echo $pass_empty_err; ?>
+
   <div class="background">
     <div class="shape"></div>
     <div class="shape"></div>
