@@ -1,0 +1,33 @@
+* {
+    background-image: url('./../../images/index/background.gif');
+    background-position: center;
+    background-size: cover;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    width: 100%;
+    position: absolute;
+
+}
+
+#zoom-in {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 35rem;
+    height: 35rem;
+    background-color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 200px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  
+  
+  
+  
