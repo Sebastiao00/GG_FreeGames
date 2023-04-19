@@ -19,10 +19,10 @@
 
     <!--Include Navbar -->
     <?php include('./navbar.php'); ?></head>
-<body>
+<body class="boddy">
   <div class="container">
     <header class="perfil">
-      <img class="perfil-foto" src="https://github.com/camilavitoriacosta.png" />
+      <img class="perfil-foto" src="../images/pages/account/photo.gif" />
       <div class="titulo">
         <h1> Camila Vitória Costa </h1>
         <h3> Estudante de Ciência da Computação </h3>

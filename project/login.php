@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/login/login.css">
     <?php
-      include('../control/login.php');
+      include('./control/log1.php');
     ?>
 </head>
 
