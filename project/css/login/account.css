@@ -17,7 +17,7 @@ body {
 /* ROSA: #b33771 | #c44569*/
 /* Preto #2c3a47 */
 .container {
-    background: #3d3b3b;
+    background: #171616;
     margin: 20px auto;
     border-radius: 20px;
     padding: 64px;
@@ -72,7 +72,7 @@ body {
     display: flex;
     flex-direction: column;
     backdrop-filter: blur();
-    background: rgba(255, 255, 255, 0.4);
+    background: 000000(255, 255, 255, 0.4);
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     border-radius: 10px;
     padding: 20px;
@@ -118,7 +118,7 @@ body {
 
 .insignias {
     backdrop-filter: blur();
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(0, 0, 0, 0.4);
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     border-radius: 10px;
     padding: 10px;
@@ -133,7 +133,7 @@ body {
 
 .redes-sociais {
     backdrop-filter: blur();
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(0, 0, 0, 0.4);
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     border-radius: 10px;
     padding: 20px;

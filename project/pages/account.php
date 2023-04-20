@@ -19,7 +19,25 @@
 
     <!--Include Navbar -->
     <?php include('./navbar.php'); ?></head>
-<body class="boddy">
+<body>
+      <?php
+/*
+      include('../db/database.php');
+
+      if (!isset($_SESSION)) {
+        session_start();
+      }
+      //Verificacao se algum utilizador esta logado 
+      if (!isset($_SESSION["id"])) {
+        header("Location:../pages/index.php");
+      }
+      // Verificacao se admin
+      if (!isset($_SESSION["number1"]) || $_SESSION["number1"] == 0) {
+        header("Location: ../login.php");
+      }
+      */
+      ?>
+
   <div class="container">
     <header class="perfil">
       <img class="perfil-foto" src="../images/pages/account/photo.gif" />

@@ -60,7 +60,7 @@ if (isset($_POST['bt_login'])) {
             $_SESSION['ut_pass'] = $pass_word;
             $_SESSION['ut_admin'] = $number;
 
-            header("Location:../pages/index.php");
+            header("Location: ../index.php");
             exit();
 
         }

@@ -14,6 +14,24 @@
     <link rel="stylesheet" href="../css/login/login.css">
 </head>
 <body>
+
+    <?php
+
+    include('../db/database.php');
+
+    if (!isset($_SESSION)) {
+        session_start();
+    }
+    //Verificacao se algum utilizador esta logado 
+    if (!isset($_SESSION["id"])) {
+        header("Location:../pages/index.php");
+    }
+    // Verificacao se admin
+    if (!isset($_SESSION["number1"]) || $_SESSION["number1"] == 0) {
+        header("Location: ../login.php");
+    }
+    ?>
+    
     <div class="background">
         <div class="shape"></div>
         <div class="shape"></div>

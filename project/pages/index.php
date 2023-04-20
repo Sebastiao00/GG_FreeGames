@@ -18,15 +18,25 @@
 </head>
 
 <body>
+    <?php
+/*
+    include('../db/database.php');
+
+    if (!isset($_SESSION)) {
+        session_start();
+    }
+    //Verificacao se algum utilizador esta logado 
+    if (!isset($_SESSION["id"])) {
+        header("Location:../pages/index.php");
+    }
+    // Verificacao se admin
+    if (!isset($_SESSION["number1"]) || $_SESSION["number1"] == 0) {
+        header("Location: ../login.php");
+    }
+    */
+    ?>
     <!-- Header-->
-    <header class="bg-dark py-5" style="background-image: url('../images/back.webp'); background-size: cover; background-position: center; height: 40vh;">
-        <div class="container px-4 px-lg-5 my-5">
-            <div class="text-center text-white">
-                <h1 class="display-4 fw-bolder">GG-FreeGames</h1>
-                <p class="lead fw-normal text-black-50 mb-0">Play with Friends</p>
-            </div>
-        </div>
-    </header>
+
     <!-- Section-->
     <section class="py-5" >
         <div class="container px-4 px-lg-5 mt-5">
