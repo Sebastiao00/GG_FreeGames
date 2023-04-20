@@ -19,21 +19,19 @@
 
 <body>
     <?php
-/*
+
     include('../db/database.php');
 
     if (!isset($_SESSION)) {
         session_start();
     }
     //Verificacao se algum utilizador esta logado 
-    if (!isset($_SESSION["id"])) {
+    if (!isset($_SESSION["ut_id"])) {
         header("Location:../pages/index.php");
     }
-    // Verificacao se admin
-    if (!isset($_SESSION["number1"]) || $_SESSION["number1"] == 0) {
-        header("Location: ../login.php");
-    }
-    */
+
+
+    
     ?>
     <!-- Header-->
 

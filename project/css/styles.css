@@ -103,6 +103,8 @@ body {
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   background-image: url("../images/pages/index/background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 hr {

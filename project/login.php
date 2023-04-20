@@ -1,3 +1,7 @@
+<?php
+  include './control/log1.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,9 +13,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/login/login.css">
-    <?php
-      include('./control/log1.php');
-    ?>
 </head>
 
 <body>
@@ -25,15 +26,15 @@
     <div class="shape"></div>
     <div class="shape"></div>
   </div>
-  <form method="post">
+  <form method="POST">
     <h3>Login </h3>
 
     <label for="email">Email</label>
-    <input type="text" placeholder="email" id="email" required>
+    <input type="text" placeholder="email" name="email" required>
 
     <label for="password">Password</label>
-    <input type="password" placeholder="Password" id="password" required>
-    <button id="bt_login">Log In</button>
+    <input type="password" placeholder="Password" name="password" required>
+    <button id="bt_login" name="bt_login">Log In</button>
     <p></p>
     <button onclick="location.href='./pages/register.php'; return false;">Register</button>
   </form>
