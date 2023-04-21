@@ -1,5 +1,5 @@
 <?php
-// Inclui o arquivo que contém a conexão com o banco de dados
+/* Inclui o arquivo que contém a conexão com o banco de dados
 include "./db/database.php";
 
 global $wrongPwdErr, $accountNotExistErr, $email_empty_err ,$pass_empty_err;
@@ -51,11 +51,10 @@ if (isset($_POST['bt_login'])) {
             // Verifica a senha
             $password = password_verify($password_signin, $pass_word);
         }
-        if ($email_signin == $email && $password) {
+        if ($email_signin == $email && $password_signin == $password) {
             $_SESSION['ut_id'] = $id;
             $_SESSION['ut_email'] = $email;
             $_SESSION['ut_first'] = $firstname;
-            $_SESSION['email'] = $email;
             $_SESSION['ut_pass'] = $pass_word;
             $_SESSION['ut_admin'] = $number;
 
@@ -76,6 +75,6 @@ if (isset($_POST['bt_login'])) {
                         </div>";
         }
     }
-}
+} */
 
 ?>

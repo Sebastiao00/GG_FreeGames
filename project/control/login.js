@@ -1,22 +1,33 @@
-fetch('database.php')
-    .then(function (response) {
-        return response.text();
-    })
-    .then(function (data) {
-        console.log(data);
-    });
+// get references to the login form and input fields
+const loginForm = document.getElementById('login-form');
+const emailInput = document.getElementById('email');
+const passwordInput = document.getElementById('password');
 
-document.getElementById("login-form").addEventListener("submit", function (event) {
-    event.preventDefault();
-    var email = document.getElementById("email").value;
-    var password = document.getElementById("password").value;
+// add a submit event listener to the login form
+loginForm.addEventListener('submit', (event) => {
+  event.preventDefault(); // prevent the default form submission behavior
 
-    for (var i = 0; i < users.length; i++) {
-        if (username === users[i].email && password === users[i].password) {
-            alert("Login bem sucedido");
-            return;
-        }
+  const email = emailInput.value;
+  const password = passwordInput.value;
+
+  // make an AJAX request to the server to check the user's credentials
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', 'login.php');
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhr.onload = () => {
+    if (xhr.status === 200) {
+      const response = JSON.parse(xhr.responseText);
+      console.log(response);
+      if (response.success) {
+        // redirect the user to the index page
+        //window.location.href = './pages/index.php';
+        window.alert("success");
+      } else {
+        // display an error message to the console
+        const error = response.message;
+        console.error(error);
+      }
     }
-
-    alert("Nome de usuário ou senha incorretos");
+  };
+  xhr.send(`ut_email=${email}&ut_pass=${password}`);
 });
