@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/login/login.css">
 
-  <script href="control/login.js"></script>
+  <script src="control/login.js"></script>
 </head>
 
 <body>
@@ -30,7 +30,6 @@
     <label for="password">Password</label>
     <input type="password" placeholder="Password" id="password" required>
     <button type="submit" id="bt_login">Log In</button>
-    <p></p>
   </form>
   
   <!-- <button onclick="location.href='./pages/register.php'; return false;">Register</button> -->
