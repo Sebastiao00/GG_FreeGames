@@ -1,3 +1,8 @@
+<?php 
+//DataBase
+include "db/database.php"; 
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,27 +16,23 @@
 </head>
 
 <body>
-
-  <?php include "db/database.php"; ?>
-
   <div class="background">
     <div class="shape"></div>
     <div class="shape"></div>
   </div>
   
-  <form method="POST" id="login-form">
+  <form method="POST" id="loginform" name="loginform">
     <h3>Login </h3>
     
     <label for="email">Email</label>
-    <input type="text" placeholder="email" id="email" required>
+    <input type="text" placeholder="email" id="email"  name="email" required>
     
     <label for="password">Password</label>
-    <input type="password" placeholder="Password" id="password" required>
+    <input type="password" placeholder="Password" id="password" name="password" required>
     <button type="submit" id="bt_login">Log In</button>
   </form>
-  
-  <!-- <button onclick="location.href='./pages/register.php'; return false;">Register</button> -->
 
-  <script src="control/login.js"></script>
+    <!-- <button onclick="location.href='./pages/register.php'; return false;">Register</button> -->
+    <script src="control/login.js"></script>
 </body>
 </html>
