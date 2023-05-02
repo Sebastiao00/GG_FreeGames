@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/login/login.css">
     <?php
-        include('../control/login.php');
+        include('../control/register.php');
     ?>
 </head>
 <body>
@@ -36,7 +36,7 @@
         <input type="password" placeholder="Password" id="rg_pass1" name="rg_pass1" required>
         <?php echo $_passwordErr; // Password error message ?>
 
-        <button  type="submit" id="bt_rigister" name="bt_rigister">Register</button>
+        <button  type="submit" id="bt_register" name="bt_register">Register</button>
         </form>
     </body>
 </html>

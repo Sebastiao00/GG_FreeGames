@@ -10,15 +10,16 @@ if (loginForm != null) {
 
     const email = emailInput.value;
     const password = passwordInput.value;
+    const contentType ='';
 
     try {
       // make an AJAX request to the server to check the user's credentials
       const xhr = new XMLHttpRequest();
-      xhr.open('POST', './login.php');
+      xhr.open('POST', 'login.php');
       xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
       xhr.onload = function() {
         if (xhr.status === 200) {
-          const contentType = xhr.getResponseHeader('Content-Type');
+          contentType == xhr.getResponseHeader('Content-Type');
           if (contentType.includes('application/json')) {
             const response = JSON.parse(xhr.responseText);
             if (response && response.hasOwnProperty('success')) {
@@ -37,7 +38,12 @@ if (loginForm != null) {
           } else {
             console.error('O servidor não retornou um conteúdo JSON válido.');
           }
+        } else {
+          console.error(`Erro ${xhr.status}: ${xhr.statusText}`);
         }
+      };
+      xhr.onerror = function() {
+        console.error('Ocorreu um erro de rede.');
       };
       xhr.send(`ut_email=${email}&ut_pass=${password}`);
     } catch (err) {

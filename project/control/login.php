@@ -1,71 +1,51 @@
 <?php
+// Start the session
+session_start();
 
-// Inclui o arquivo que contém a conexão com o banco de dados
-include("../db/database.php");
+// Include the database connection file
+include_once "db/database.php";
 
-// Insert
-global $success_insert, $f_NameErr, $l_NameErr, $_emailErr, $_mobileErr, $_passwordErr;
-global $result, $sql;
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieve form data
+    $email = $_POST["email"];
+    $password = $_POST["password"];
 
-
-// Rigister System
-// Verifica se o formulário foi submetido
-if (isset($_POST['bt_rigister'])) {
-
-    // Coleta as informações do formulário
-    $admin_nr = 0;
-    $f_Name = $_POST["rg_name"];
-    $l_Name = $_POST["rg_last"];
-    $email = filter_var($_POST["rg_email"], FILTER_SANITIZE_EMAIL);
-    $password = $_POST["rg_pass1"];
-
-    // perform validation
-    if (!preg_match("/^[a-zA-Z ]*$/", $f_Name)) {
-        $f_NameErr = '<div class="alert alert-danger">
-                           Només es permeten lletres i espais en blanc.
-                        </div>';
-    }
-
-    if (!preg_match("/^[a-zA-Z ]*$/", $l_Name)) {
-        $l_NameErr = '<div class="alert alert-danger">
-                           Només es permeten lletres i espais en blanc.
-                        </div>';
-    }
-
-    // Verifica se o endereço de email é válido
+    // Validate form data
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo "Endereço de email inválido.";
-        exit;
+        // Invalid email format
+        // Show error message and stop processing further
     }
 
-    //verificação da Senha
-    if (!preg_match("/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,20}$/", $password)) {
-        $_passwordErr = '<div class="alert alert-danger">
-                           La contrasenya ha de tenir entre 6 i 20 xarcters de llarg, conté almenys un chacter especial, minúscula, majúscules i un dígit.
-                        </div>';
+    // Query the database to check if the user exists
+    $query = "SELECT * FROM utilizadores WHERE ut_email = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows == 0) {
+        // User does not exist in the database
+        // Show error message and stop processing further
     }
 
+    $user = $result->fetch_assoc();
 
-    // Password hash
-    $password_hash = password_hash($password, PASSWORD_BCRYPT);
-
-    // Store the data in db, if all the preg_match condition met
-    if (empty($f_NameErr) && empty($l_NameErr) && empty($_emailErr) && empty($_mobileErr) && empty($_passwordErr)) {
-
-        $sql = "INSERT INTO utilizadores ( ut_email, ut_first, ut_last, ut_pass, ut_admin)
-                          VALUES ('$email', '$f_Name', '$l_Name', '$password_hash', '0')";
-        $result = $conn->query($sql);
-
-        
-        if ($result) {
-            $success_insert = "<div class='alert alert-success'>
-            Insertado con éxito! Haga clic en el botón 'Verificar cambios' para ver los cambios realizados en la tabla.
-            </div>";
-            header("Location: index.php");
-        } else {
-            echo "Erro: " . $sql . "<br>";
-        }
+    // Verify the password
+    if (!password_verify($password, $user["ut_pass"])) {
+        // Incorrect password
+        // Show error message and stop processing further
     }
+
+    // Start the session and store user data
+    session_start();
+    $_SESSION["user_id"] = $user["id"];
+    $_SESSION["user_email"] = $user["ut_email"];
+    $_SESSION["user_first"] = $user["ut_first"];
+    $_SESSION["user_last"] = $user["ut_last"];
+    $_SESSION["user_admin"] = $user["ut_admin"];
+
+    // Redirect the user to the homepage or some other page
+    header("Location: pages\index.php");
+    exit();
 }
-
 ?>
