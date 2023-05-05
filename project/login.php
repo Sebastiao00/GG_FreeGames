@@ -1,6 +1,7 @@
 <?php 
 //DataBase
-include "db/database.php"; 
+include "db/database.php";
+include('control/login.php');
 ?>
 
 <!DOCTYPE html>
@@ -13,9 +14,6 @@ include "db/database.php";
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/login/login.css">
-  <?php
-        include('../control/login.php');
-    ?>
 </head>
 
 <body>
@@ -33,10 +31,14 @@ include "db/database.php";
     <label for="password">Password</label>
     <input type="password" placeholder="Password" id="password" name="password" required>
     <button type="submit" id="bt_login">Log In</button>
-    <button onclick="location.href='./pages/register.php'; return false;">Register</button>
+    <?php if(isset($_GET["error"]) && $_GET["error"] == "invalid_email"): ?>
+        <p class="error-message">Invalid email format</p>
+    <?php elseif(isset($_GET["error"]) && $_GET["error"] == "user_not_found"): ?>
+        <p class="error-message">User does not exist</p>
+    <?php elseif(isset($_GET["error"]) && $_GET["error"] == "incorrect_password"): ?>
+        <p class="error-message">Incorrect password</p>
+    <?php endif; ?>
   </form>
-<?php
-  //  <script src="control/login.js"></script>
-    ?>
+
 </body>
 </html>

@@ -20,7 +20,7 @@
                  </li>
              </ul>
              <form class="d-flex" href="./account.php">
-                 <button class="btn btn-outline-light" id="account">
+                 <button class="btn btn-outline-light" id="account" href="./acccount.php">
                      <i class="bi bi-person-circle"></i>
                      Account
                  </button>
@@ -29,15 +29,3 @@
      </div>
  </nav>
 
- <script>
-     // Get the button element by its ID
-     const accountButton = document.getElementById("account");
-
-     // Add an event listener to the button
-     accountButton.addEventListener("click", function() {
-         // Change the page by setting the window location to the desired URL
-         window.location.href = "./account.php";
-
-     });
- 
- </script>

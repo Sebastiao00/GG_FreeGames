@@ -7,80 +7,69 @@ const clouds4 = document.querySelector('.clouds4');
 let score = 0;
 let scored = false;
 const scoredisplay = document.getElementById('scoreboard');
+let speed = 10;
 
 const jump = () => {
-    mario.classList.add('jump');
+  mario.classList.add('jump');
 
-    setTimeout(() =>{
-
-        mario.classList.remove('jump');
-
-    },500)
-}
+  setTimeout(() => {
+    mario.classList.remove('jump');
+  }, 500);
+};
 
 const loop = setInterval(() => {
+  const pipeposition = pipe.offsetLeft;
+  const marioposition = +window.getComputedStyle(mario).bottom.replace('px', '');
+  const cloudsposition = clouds.offsetLeft;
+  const clouds2position = clouds2.offsetLeft;
+  const clouds3position = clouds3.offsetLeft;
+  const clouds4position = clouds4.offsetLeft;
 
-
-    const pipeposition = pipe.offsetLeft;
-    const marioposition = +window.getComputedStyle(mario).bottom.replace('px','');
-    const cloudsposition = clouds.offsetLeft;
-    const clouds2position = clouds2.offsetLeft;
-    const clouds3position = clouds3.offsetLeft;
-    const clouds4position = clouds4.offsetLeft;
-
-    if (pipeposition <= 80 && pipeposition > 0 && marioposition >= 90 && !scored) {
-
-        score++;
-        console.log(score);
-        scoredisplay.textContent = score;
-        scored = true;
-        
+  if (pipeposition <= 80 && pipeposition > 0 && marioposition >= 90 && !scored) {
+    score++;
+    console.log(score);
+    scoredisplay.textContent = score;
+    scored = true;
+    if (score % 10 === 0) {
+      speed += 2;
     }
+  }
 
-    if (pipeposition <= 0) {
-        scored = false;
-    }
+  if (pipeposition <= 0) {
+    scored = false;
+  }
 
-    if(pipeposition <= 80 && pipeposition > 0 && marioposition < 90) {
+  if (pipeposition <= 80 && pipeposition > 0 && marioposition < 90) {
+    pipe.style.animation = 'none';
+    pipe.style.left = `${pipeposition}px`;
 
+    clouds2.style.animation = 'none';
+    clouds2.style.left = `${clouds2position}px`;
 
+    clouds3.style.animation = 'none';
+    clouds3.style.left = `${clouds3position}px`;
 
-        
+    clouds4.style.animation = 'none';
+    clouds4.style.left = `${clouds4position}px`;
 
-        pipe.style.animation = 'none'; 
-        pipe.style.left =`${pipeposition}px`;
+    clouds.style.animation = 'none';
+    clouds.style.left = `${cloudsposition}px`;
 
-        clouds2.style.animation = 'none'; 
-        clouds2.style.left = `${clouds2position}px`;
+    mario.style.animation = 'none';
+    mario.style.bottom = `${marioposition}px`;
 
-        clouds3.style.animation = 'none'; 
-        clouds3.style.left = `${clouds3position}px`;
+    mario.src = './../../images/game/gameover.png';
+    mario.style.width = '75px';
+    mario.style.marginLeft = '20px';
 
-        clouds4.style.animation = 'none'; 
-        clouds4.style.left = `${clouds4position}px`;
+    clearInterval(loop);
 
-        clouds.style.animation = 'none'; 
-        clouds.style.left = `${cloudsposition}px`;
+    scoredisplay.textContent = score;
 
-        mario.style.animation = 'none'; 
-        mario.style.bottom =`${marioposition}px`;
+    setTimeout(() => {
+      window.location.href = './menu.php';
+    }, 1000);
+  }
+}, speed);
 
-        mario.src = './../../images/game/gameover.png';
-        mario.style.width = '75px';
-        mario.style.marginLeft = '20px';
-
-        clearInterval(loop);
-
-        scoredisplay.textContent = score;
-
-        setTimeout(() =>{
-
-            window.location.href = "./menu.php";
-
-        },1000)
-
-    }
-}, 10);
-
-
-document.addEventListener('keydown',jump);
+document.addEventListener('keydown', jump);

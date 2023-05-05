@@ -61,7 +61,7 @@ if (isset($_POST['bt_register'])) {
             $success_insert = "<div class='alert alert-success'>
             Insertado con éxito! Haga clic en el botón 'Verificar cambios' para ver los cambios realizados en la tabla.
             </div>";
-            header("Location: index.php");
+            header("Location: pages/index.php");
         } else {
             echo "Erro: " . $sql . "<br>";
         }

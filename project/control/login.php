@@ -1,19 +1,19 @@
 <?php
+// Include the database connection file
+include("db/database.php");
+
 // Start the session
 session_start();
 
-// Include the database connection file
-include_once "db/database.php";
+// Retrieve form data
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve form data
+if(isset($_POST["email"]) && isset($_POST["password"])) {
     $email = $_POST["email"];
     $password = $_POST["password"];
-
     // Validate form data
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         // Invalid email format
-        // Show error message and stop processing further
+        $error = "Invalid email format";
     }
 
     // Query the database to check if the user exists
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result->num_rows == 0) {
         // User does not exist in the database
-        // Show error message and stop processing further
+        $error = "User does not exist";
     }
 
     $user = $result->fetch_assoc();
@@ -33,19 +33,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Verify the password
     if (!password_verify($password, $user["ut_pass"])) {
         // Incorrect password
-        // Show error message and stop processing further
+        $error = "Incorrect password";
     }
 
-    // Start the session and store user data
-    session_start();
-    $_SESSION["user_id"] = $user["id"];
-    $_SESSION["user_email"] = $user["ut_email"];
-    $_SESSION["user_first"] = $user["ut_first"];
-    $_SESSION["user_last"] = $user["ut_last"];
-    $_SESSION["user_admin"] = $user["ut_admin"];
+    if(isset($error)){
+        // Show error message and stop processing further
+        echo "<script>alert('$error')</script>";
+    } else {
+        // Start the session and store user data
+        $_SESSION["user_id"] = $user["id"];
+        $_SESSION["user_email"] = $user["ut_email"];
+        $_SESSION["user_first"] = $user["ut_first"];
+        $_SESSION["user_last"] = $user["ut_last"];
+        $_SESSION["user_admin"] = $user["ut_admin"];
 
-    // Redirect the user to the homepage or some other page
-    header("Location: pages\index.php");
-    exit();
+        // Redirect the user to the homepage or some other page
+        header("Location: pages/index.php");
+        exit();
+    }
+
 }
+
 ?>

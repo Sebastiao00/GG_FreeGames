@@ -14,24 +14,27 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="../css/styles.css" rel="stylesheet" />
     <!--Include Navbar -->
-    <?php include('./navbar.php'); ?>
+    <?php
+        include('../db/database.php');
+        include('./navbar.php'); 
+    ?>
 </head>
 
 <body>
     <?php
-
-    include('../db/database.php');
-
-    if (!isset($_SESSION)) {
-        session_start();
+    session_start();
+/*
+    if(isset($_SESSION["user_id"])) {
+        $_SESSION["user_email"] = $user["ut_email"];
+        $_SESSION["user_first"] = $user["ut_first"];
+        $_SESSION["user_last"] = $user["ut_last"];
+        $_SESSION["user_admin"] = $user["ut_admin"];
     }
-    //Verificacao se algum utilizador esta logado 
-    if (!isset($_SESSION["ut_id"])) {
-        header("Location:../pages/index.php");
+    else  {
+        header("Location: ../login.php");
+        exit();
     }
-
-
-    
+    */
     ?>
     <!-- Header-->
 
