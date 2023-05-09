@@ -49,7 +49,6 @@ if(isset($_POST["email"]) && isset($_POST["password"])) {
 
         // Redirect the user to the homepage or some other page
         header("Location: pages/index.php");
-        exit();
     }
 
 }

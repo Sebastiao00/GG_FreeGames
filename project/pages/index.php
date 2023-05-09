@@ -1,3 +1,22 @@
+<?php
+    include('../db/database.php');
+
+if (!isset($_SESSION)) {
+  session_start();
+}
+//Verificacao se algum utilizador esta logado 
+if (!isset($_SESSION["user_admin"])) {
+  header("Location: ../login.php");
+}
+if($_SESSION["user_admin"] == 0){
+    include('./navbar.php'); 
+}
+else {
+    include('./admin_navbar.php'); 
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,28 +33,9 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="../css/styles.css" rel="stylesheet" />
     <!--Include Navbar -->
-    <?php
-        include('../db/database.php');
-        include('./navbar.php'); 
-    ?>
 </head>
 
 <body>
-    <?php
-    session_start();
-/*
-    if(isset($_SESSION["user_id"])) {
-        $_SESSION["user_email"] = $user["ut_email"];
-        $_SESSION["user_first"] = $user["ut_first"];
-        $_SESSION["user_last"] = $user["ut_last"];
-        $_SESSION["user_admin"] = $user["ut_admin"];
-    }
-    else  {
-        header("Location: ../login.php");
-        exit();
-    }
-    */
-    ?>
     <!-- Header-->
 
     <!-- Section-->

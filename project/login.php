@@ -39,6 +39,7 @@ include('control/login.php');
         <p class="error-message">Incorrect password</p>
     <?php endif; ?>
   </form>
+  <button class="button_register" href="pages\register.php"> Register </button>
 
 </body>
 </html>
