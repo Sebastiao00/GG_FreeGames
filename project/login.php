@@ -30,7 +30,7 @@ include('control/login.php');
     
     <label for="password">Password</label>
     <input type="password" placeholder="Password" id="password" name="password" required>
-    <button type="submit" id="bt_login">Log In</button>
+    <button type="submit" name="bt_login" id="bt_login">Log In</button>
     <?php if(isset($_GET["error"]) && $_GET["error"] == "invalid_email"): ?>
         <p class="error-message">Invalid email format</p>
     <?php elseif(isset($_GET["error"]) && $_GET["error"] == "user_not_found"): ?>
@@ -38,8 +38,13 @@ include('control/login.php');
     <?php elseif(isset($_GET["error"]) && $_GET["error"] == "incorrect_password"): ?>
         <p class="error-message">Incorrect password</p>
     <?php endif; ?>
+
+    <button type="button" name="bt_register" id="bt_register" onclick="window.location.href='./pages/register.php'">Register</button>
   </form>
-  <button class="button_register" href="pages\register.php"> Register </button>
+
+    
+
+
 
 </body>
 </html>

@@ -36,7 +36,9 @@
         <input type="password" placeholder="Password" id="rg_pass1" name="rg_pass1" required>
         <?php echo $_passwordErr; // Password error message ?>
 
-        <button  type="submit" id="bt_register" name="bt_register">Register</button>
+        <button type="submit" id="bt_register" name="bt_register">Register</button>
+        <button type="button" name="bt_register" id="bt_register" onclick="window.location.href='../login.php'">Back</button>
+
         </form>
     </body>
 </html>

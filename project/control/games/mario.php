@@ -1,45 +1,57 @@
 <?php
-$score = "<h1>O seu score é: <span id='scoreboard'></span></h1>";
-if (isset($score)) {
-    // Perform any necessary processing or storing of the score value
-    echo $score;
-    echo "Score processed successfully";
-}
+// Assuming session_start() is called before this code
 
 include('./../../db/database.php');
 
 if (!isset($_SESSION)) {
-    session_start();
-    $id_ut = $_SESSION["ut_id"];
+    echo "Session not set.";
+    exit;
 }
 
-$ut_query = "SELECT * FROM utilizadores WHERE ut_id = ?";
-$stmt = $conn->prepare($ut_query);
-$stmt->bind_param("s", $id_ut);
-$stmt->execute();
-$result = $stmt->get_result();
+// Make sure user_id is set in the session
+if (!isset($_SESSION["user_id"])) {
+    echo "User ID not set.";
+    exit;
+}
 
-$query = "SELECT * FROM games WHERE id_gm_ut = ?";
-$stmt2 = $conn->prepare($query);
-$stmt2->bind_param("s", $id_ut);
-$stmt2->execute();
-$result2 = $stmt2->get_result();
+$id_ut = $_SESSION["user_id"];
 
-$row = $result2->fetch_assoc();
-if (isset($row)) {
-    // Acessar os valores da linha atual
-    $gameId = $row['game_id'];
-    $gameName = $row['game_name'];
-    $gameScore = $row['gm_score'];
+$score = "<h1>O seu score é: <span id='scoreboard'></span></h1>";
+echo $score;
+echo "Score displayed successfully";
 
-    if ($score > $gameScore) {
-        $sql = "UPDATE games SET gm_score = ? WHERE id_game = ?";
-        $stmt3 = $conn->prepare($sql);
-        $stmt3->bind_param("ii", $gameScore, $gameId);
-        $stmt3->execute();
-        $result3 = $stmt3->get_result();
+
+$query = "SELECT * FROM games WHERE id_gm_ut = $id_ut";
+$result2 = $conn->query($query);
+
+if ($result2) {
+    $row = $result2->fetch_assoc();
+    if ($row) {
+        $gameId = $row['game_id'];
+        $gameName = $row['game_name'];
+        $gameScore = $row['gm_score'];
+
+        // Assuming you have a new score value stored in $newScore
+        $newScore = 100; // Replace with your actual new score value
+
+        if ($newScore > $gameScore) {
+            $sql = "UPDATE games SET gm_score = ? WHERE id_game = ?";
+            $stmt3 = $conn->prepare($sql);
+            $stmt3->bind_param("ii", $newScore, $gameId);
+            $stmt3->execute();
+            $result3 = $stmt3->get_result();
+            if ($result3) {
+                echo "Score updated successfully";
+            } else {
+                echo "Score update failed: " . $stmt3->error;
+            }
+        } else {
+            echo "New score is not higher than the existing score";
+        }
+    } else {
+        echo "No game data found.";
     }
 } else {
-    echo "No game data found.";
+    echo "Query failed: " . $conn->error;
 }
 ?>

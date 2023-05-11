@@ -6,7 +6,7 @@ include("db/database.php");
 session_start();
 
 // Retrieve form data
-
+if(isset($_POST["bt_login"])){
 if(isset($_POST["email"]) && isset($_POST["password"])) {
     $email = $_POST["email"];
     $password = $_POST["password"];
@@ -41,7 +41,7 @@ if(isset($_POST["email"]) && isset($_POST["password"])) {
         echo "<script>alert('$error')</script>";
     } else {
         // Start the session and store user data
-        $_SESSION["user_id"] = $user["id"];
+        $_SESSION["user_id"] = $user["ut_id"];
         $_SESSION["user_email"] = $user["ut_email"];
         $_SESSION["user_first"] = $user["ut_first"];
         $_SESSION["user_last"] = $user["ut_last"];
@@ -52,5 +52,12 @@ if(isset($_POST["email"]) && isset($_POST["password"])) {
     }
 
 }
+}
 
+if(isset($_POST["bt_register"])){
+
+            // Redirect the user to the homepage or some other page
+            header("Location: pages/register.php");
+
+}
 ?>
