@@ -1,3 +1,15 @@
+<?php
+    include('./../../db/database.php');
+
+    if (!isset($_SESSION)) {
+        session_start();
+    }
+    //Verificacao se algum utilizador esta logado 
+    if (!isset($_SESSION["user_admin"])) {
+        header("Location: ./../../login.php");
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
