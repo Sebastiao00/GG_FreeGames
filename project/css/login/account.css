@@ -228,3 +228,24 @@ input {
     left: 50%;
     transform: translateX(-50%);
 }
+
+.admin_bt_tema {
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.admin_perfil {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.admin_titulo {
+    text-align: center;
+    margin-top: 50px;
+}
