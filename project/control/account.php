@@ -5,16 +5,21 @@ include("../db/database.php");
 global $f_NameErr, $_passwordErr, $l_NameErr;
 $f_NameErr = $_passwordErr = $l_NameErr = "";
 
+global $id, $email, $first, $last, $password1, $password2;
+$id = $email = $first = $last = $password1 = $password2 = ""; 
+
 // Retrieve form data
 if(isset($_POST["bt_update"])){
 
-        $id = $_POST["id"];
-        $email = $_POST["email"];
+        $id = $_SESSION['user_id'];
+        $email = $_SESSION['user_email'];
         $first = $_POST["first"];
         $last = $_POST["last"];
         $password1 = $_POST["pass1"];
         $password2 = $_POST["pass2"];
+        
 
+        echo $id;
         // Verify the password
         if ($password1 != $password2) {
             // Incorrect password
@@ -68,28 +73,9 @@ if(isset($_POST["bt_update"])){
 }
 
 if (isset($_POST["bt_logout"])) {
-
-
-        // Initialize the session.
-    // If you are using session_name("something"), don't forget it now!
-    session_start();
-
-    // Unset all of the session variables.
-    $_SESSION = array();
-
-    // If it's desired to kill the session, also delete the session cookie.
-    // Note: This will destroy the session, and not just the session data!
-    if (ini_get("session.use_cookies")) {
-        $params = session_get_cookie_params();
-        setcookie(session_name(), '', time() - 42000,
-            $params["path"], $params["domain"],
-            $params["secure"], $params["httponly"]
-        );
-    }
-
     // Finally, destroy the session.
     session_destroy();
-    header("Location: ../pages/index.php");
+    header("Location: ./../login.php");
     exit();
 }
 ?>

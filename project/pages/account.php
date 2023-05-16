@@ -79,8 +79,8 @@
                 <p class="error-message">Incorrect password</p>
                 <?php endif; ?>
                 <button type="submit" class="button_update" name="bt_update" id="bt_update">Update</button>
+                <button type="submit" class="button_update" name="bt_logout" id="bt_logout" formnovalidate>Logout</button>
             </form>
-            <button class="bt_logout">Logout</button>
     </div>
 </body>
 

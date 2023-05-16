@@ -41,10 +41,5 @@ include('control/login.php');
 
     <button type="button" name="bt_register" id="bt_register" onclick="window.location.href='./pages/register.php'">Register</button>
   </form>
-
-    
-
-
-
 </body>
 </html>
