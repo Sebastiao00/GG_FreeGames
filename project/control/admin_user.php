@@ -1,20 +1,17 @@
 <?php
-if (!isset($_SESSION)) {
-    session_start();
-    $user_id = $_SESSION['user_id'];
-}
 
-$sql = "SELECT * FROM utilizadores WHERE id = ?;";
+include("../db/database.php");
+
+// Start the session
+session_start();
+$user_id = $_SESSION['user_id'];
+
+
+$sql = "SELECT * FROM utilizadores WHERE ut_id = '$user_id';";
 $result = $conn->query($sql);
 
-echo $result;
 
-/*while ($row = mysqli_fetch_array($get_users)) {
-    $fotosrc = '../assets/img/fotos_clientes/' . $row["CL_nif"] . '.jpg';
-    if (!file_exists($fotosrc)) {
-        $fotosrc = 'http://localhost/nos/assets/img/team/avatar.png';
-    }
-
+while ($row = $result->fetch_assoc()) {
     echo '
         <tr class="align-middle">
             <td class="d-table-cell"><span class="badge rounded-pill badge-soft-danger">' . $row["ut_id"] . '</span></td>
@@ -37,5 +34,7 @@ echo $result;
             </td>
         </tr>
     ';
-}*/
+
+}
+
 ?>
