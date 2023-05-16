@@ -55,7 +55,7 @@ if(isset($_POST["bt_update"])){
     // Store the data in db, if all the preg_match condition met
     if (empty($f_NameErr) && empty($l_NameErr) && empty($_passwordErr)) {
 
-        $sql = "UPDATE utilizadores SET ut_email = '$email', ut_first = '$first', ut_last = '$last', ut_pass = '$password_hash', ut_admin = '0' WHERE ut_id = $id";
+        $sql = "UPDATE utilizadores SET ut_email = '$email', ut_first = '$first', ut_last = '$last', ut_pass = '$password_hash', ut_admin = '0' WHERE ut_id = '$id'";
         $result = $conn->query($sql);
         
         if ($result) {
