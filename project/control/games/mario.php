@@ -8,7 +8,10 @@ $name_ut = $_SESSION["user_first"];
 
 
 $score = "<h1>O seu score é: <span id=scoreboard></span></h1>";
+$score2 ="<span id=scoreboard></span>";
 echo $score;
+
+
 echo "Score displayed successfully";
 
 
