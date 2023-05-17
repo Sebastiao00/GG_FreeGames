@@ -4,6 +4,8 @@
 include('./../../db/database.php');
 
 $id_ut = $_SESSION["user_id"];
+$name_ut = $_SESSION["user_first"];
+
 
 $score = "<h1>O seu score é: <span id=scoreboard></span></h1>";
 echo $score;
@@ -31,9 +33,12 @@ if(isset($_POST)) {
         }
         
     } else {
-        echo "0 results";
+        
+        $sql3 = "INSERT INTO games ( gm_name, gm_score, id_gm_ut)
+        VALUES ('$name_ut', '1', '$id_ut')";
+        $result3 = $conn->query($sql3);
     }
-
+    
 
 }
 

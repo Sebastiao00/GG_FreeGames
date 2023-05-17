@@ -66,6 +66,17 @@ const loop = setInterval(() => {
 
     scoredisplay.textContent = score;
 
+        const xhr3 = new XMLHttpRequest();
+    xhr3.open("POST", "../control/games/mario.php", true);
+    xhr3.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr3.onreadystatechange = function() {
+      if (xhr3.readyState === 4 && xhr3.status === 200) {
+        const response = xhr3.responseText;
+        console.log(response); // Response from PHP
+      }
+    };
+    xhr3.send("score=" + encodeURIComponent(score)); // Send the value to PHP
+
     setTimeout(() => {
       //window.location.href = './menu.php';
     }, 1000);
@@ -74,15 +85,6 @@ const loop = setInterval(() => {
 
 document.addEventListener('keydown', jump);
 
-const xhr3 = new XMLHttpRequest();
-xhr3.open("POST", "process_score.php", true);
-xhr3.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-xhr3.onreadystatechange = function() {
-  if (xhr3.readyState === 4 && xhr3.status === 200) {
-    const response = xhr3.responseText;
-    console.log(response); // Response from PHP
-  }
-};
-xhr3.send("score=" + encodeURIComponent(score)); // Send the value to PHP
+
 
 

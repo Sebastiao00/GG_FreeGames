@@ -249,3 +249,25 @@ input {
     text-align: center;
     margin-top: 50px;
 }
+
+.admin_form {
+    top: 50%;
+    left: 20%;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+    padding: 50px 35px;
+    margin-top: 20px;
+}
+
+.admin_projetos {
+    display: flex;
+    flex-direction: column;
+    backdrop-filter: blur();
+    background: 000000(255, 255, 255, 0.4);
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    border-radius: 10px;
+    margin: 10px;
+    min-width: 670px;
+}
