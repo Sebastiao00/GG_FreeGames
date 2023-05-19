@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
+    <!-- Include the necessary CSS and JavaScript libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+
+    <!-- ... -->
+
     <!-- Design by foolishdeveloper.com -->
     <title>Glassmorphism login Form Tutorial in html css</title>
 
@@ -35,15 +43,11 @@
         }
         //Verificacao se algum utilizador esta logado 
         if (!isset($_SESSION["user_admin"])) {
-        header("Location: ../login.php");
+        header("Location: ../../login.php");
         }
         if($_SESSION["user_admin"] == 0){
-        include_once('../navbar.php'); 
-        }
-        else {
         include_once('../admin_navbar.php'); 
         }
-
     ?>
 </head>
 
@@ -51,30 +55,27 @@
     <div class="container">
         <main class="admin_projetos">
             <form method="post" class="admin_form" action="">
-                <table id="tabeladerespostas" class="table table-striped table-scroll" style="width:100%">
+                <table id="tabeladerespostas" class="table table-striped table-scroll">
                     <thead>
                         Classificações
                         <tr>
-                            <th><button  type="submit" class="button_update" name="bt_mario" id="bt_mario"> Super Mario </button></th>
-                            <th>Email</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Adminstração</th>
-                            <th>Ações</th>
+                            <th><button type="submit" class="button_update" name="bt_utilizadores" id="bt_utilizadores">
+                                    Utilizadores </button></th>
+                            <th><button type="submit" class="button_update" name="bt_mario" id="bt_mario"> Super Mario
+                                </button></th>
+                            <th><button type="submit" class="button_update" name="bt_memory" id="bt_memory"> Memory Game
+                                    - Rick and Morty </button></th>
                         </tr>
-                        <tr>
-                            <th>ID</th>
-                            <th>Email</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Adminstração</th>
-                            <th>Ações</th>
-                        </tr>
+
                         <?php
                             include_once("../../control/scoreboard/score.php");
                         ?>
                     </thead>
                 </table>
+                <p></p>
+                <?php
+                        include_once("../../control/scoreboard/score2.php");
+                ?>
             </form>
     </div>
 </body>

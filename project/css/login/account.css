@@ -259,6 +259,8 @@ input {
     box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
     padding: 50px 35px;
     margin-top: 20px;
+    display: flex;
+    flex-direction: row;
 }
 
 .admin_projetos {
@@ -270,4 +272,10 @@ input {
     border-radius: 10px;
     margin: 10px;
     min-width: 670px;
+}
+
+.table {
+    width: 100%;
+    display: block;
+    overflow-x: auto;
 }

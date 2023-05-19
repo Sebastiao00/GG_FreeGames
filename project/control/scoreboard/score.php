@@ -9,7 +9,7 @@ global $id, $email, $first, $last, $password1, $password2;
 $id = $email = $first = $last = $password1 = $password2 = ""; 
 
 // Retrieve form data
-if(isset($_POST["bt_mario"])){
+if(isset($_POST["bt_utilizadores"])){
 
 
     $user_id = $_SESSION['user_id'];
@@ -21,24 +21,114 @@ if(isset($_POST["bt_mario"])){
 
     while ($row = $result->fetch_assoc()) {
         echo '
+        <tr>
+        <th>ID</th>
+        <th>Email</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Adminstração</th>
+        </tr>
             <tr class="align-middle">
                 <td class="d-table-cell"><span class="badge rounded-pill badge-soft-danger">' . $row["ut_id"] . '</span></td>
                 <td class="d-table-cell"><span class="badge rounded-pill badge-soft-danger">' . $row["ut_email"] . '</span></td>
                 <td class="d-table-cell"><span class="badge rounded-pill badge-soft-danger">' . $row["ut_first"] . '</span></td>
                 <td class="d-table-cell"><span class="badge rounded-pill badge-soft-danger">' . $row["ut_last"] . '</span></td>
                 <td class="d-table-cell"><span class="badge rounded-pill badge-soft-danger">' . $row["ut_admin"] . '</span></td>
-                <td class="d-table-cell"><button class="btn p-0 visualisebtn" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Ficha Técnica"><span class="text-500 fas fa-file-alt">             
-                <button class="btn p-0 editbtn" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="editar"><span class="text-500 fas fa-edit"></span></button>
-                <button class="btn p-0 deletebtn" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Desativar"><span class="text-500 fas fa-user-alt-slash"></span></button>
-                </td>';
+                </td>
+            </tr>';
+            
+
+
 
     }
 }
 
-if (isset($_POST["bt_logout"])) {
-    // Finally, destroy the session.
-    session_destroy();
-    header("Location: ./../login.php");
-    exit();
+
+// Retrieve form data
+if(isset($_POST["bt_mario"])){
+
+
+    $user_id = $_SESSION['user_id'];
+
+
+    $sql = "SELECT * FROM games order by gm_score asc ;";
+    $result = $conn->query($sql);
+
+
+
+
+    while ($row = $result->fetch_assoc()) {
+
+        $id_ut = $row["id_gm_ut"];
+        
+        
+        $sql2 = "SELECT * FROM utilizadores Where ut_id = '$id_ut';";
+        $result2 = $conn->query($sql2);
+        
+        while ($row2 = $result2->fetch_assoc()) {
+
+            echo '
+            <tr>
+            <th>ID</th>
+            <th>Nome do Jogo</th>
+            <th>Game Score</th>
+            <th>Player</th>
+            </tr>
+                <tr class="align-middle">
+                    <td class="d-table-cell"><span class="badge rounded-pill badge-soft-danger">' . $row["id_game"] . '</span></td>
+                    <td class="d-table-cell"><span class="badge rounded-pill badge-soft-danger"> Super Mario SpeedRun</span></td>
+                    <td class="d-table-cell"><span class="badge rounded-pill badge-soft-danger">' . $row["gm_score"] . '</span></td>
+                    <td class="d-table-cell"><span class="badge rounded-pill badge-soft-danger">' . $row2["ut_first"] .' '. $row2["ut_last"] . '</span></td>
+                    </td>';
+                
+
+        }
+    }
 }
+
+
+
+// Retrieve form data
+if(isset($_POST["bt_memory"])){
+
+
+    $user_id = $_SESSION['user_id'];
+
+
+    $sql = "SELECT * FROM games order by gm_score_time desc ;";
+    $result = $conn->query($sql);
+
+
+
+
+    while ($row = $result->fetch_assoc()) {
+
+        $id_ut = $row["id_gm_ut"];
+        
+        
+        $sql2 = "SELECT * FROM utilizadores Where ut_id = '$id_ut';";
+        $result2 = $conn->query($sql2);
+        
+        while ($row2 = $result2->fetch_assoc()) {
+
+            echo '
+            <tr>
+            <th>ID</th>
+            <th>Nome do Jogo</th>
+            <th>Time</th>
+            <th>Player</th>
+            </tr>
+                <tr class="align-middle">
+                    <td class="d-table-cell"><span class="badge rounded-pill badge-soft-danger">' . $row["id_game"] . '</span></td>
+                    <td class="d-table-cell"><span class="badge rounded-pill badge-soft-danger"> Memory Game - Rick and Morty  </span></td>
+                    <td class="d-table-cell"><span class="badge rounded-pill badge-soft-danger">' . $row["gm_score_time"] . '</span></td>
+                    <td class="d-table-cell"><span class="badge rounded-pill badge-soft-danger">' . $row2["ut_first"] .' '. $row2["ut_last"] . '</span></td>
+                    </td>';
+                
+
+        }
+    }
+}
+
+
 ?>
