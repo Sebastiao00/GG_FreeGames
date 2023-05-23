@@ -7,6 +7,7 @@ const clouds4 = document.querySelector('.clouds4');
 let score = 0;
 let scored = false;
 const scoredisplay = document.getElementById('scoreboard');
+const hiddenScore = document.getElementById("hidden-score");
 let speed = 10;
 
 const jump = () => {
@@ -30,6 +31,9 @@ const loop = setInterval(() => {
     console.log(score);
     scoredisplay.textContent = score;
     scored = true;
+
+    hiddenScore.value = score;
+
     if (score % 10 === 0) {
       speed += 2;
     }
