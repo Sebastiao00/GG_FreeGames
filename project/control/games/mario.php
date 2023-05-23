@@ -11,7 +11,10 @@ echo "<h1>O seu score é:
 " . $score = "<span id=scoreboard></span>" . "
 </h1>";
 
+$score = intval($score);
+
 echo $score;
+
 
 
 echo "Score displayed successfully";

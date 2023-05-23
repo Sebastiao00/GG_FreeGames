@@ -23,18 +23,22 @@
 </head>
 
 <body class="boddy">
-    <div class="game-board">
-        <img src="./../../images/game/nuvens.png" class="clouds">
-        <img src="./../../images/game/nuvens.png" class="clouds2">
-        <img src="./../../images/game/nuvens.png" class="clouds3">
-        <img src="./../../images/game/nuvens.png" class="clouds4">
-        <img src="./../../images/game/mario.webp" class="mario">
-        <img src="./../../images/game/tubo.png" class="pipe">
-        <div class="score">
-            <?php
-                include('./../../control/games/mario.php');
-            ?>
+    <form method="post" action="">
+        <div class="game-board">
+            <img src="./../../images/game/nuvens.png" class="clouds">
+            <img src="./../../images/game/nuvens.png" class="clouds2">
+            <img src="./../../images/game/nuvens.png" class="clouds3">
+            <img src="./../../images/game/nuvens.png" class="clouds4">
+            <img src="./../../images/game/mario.webp" class="mario">
+            <img src="./../../images/game/tubo.png" class="pipe">
+            <div class="score">
+                <?php
+                    include('./../../control/games/mario.php');
+                ?>
+            </div>
+            <button type="button" id='update' name='update' ></button>
         </div>
-    </div>
+    </form>
+
 </body>
 </html>
