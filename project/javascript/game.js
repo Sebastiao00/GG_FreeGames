@@ -32,8 +32,6 @@ const loop = setInterval(() => {
     scoredisplay.textContent = score;
     scored = true;
 
-    hiddenScore.value = score;
-
     if (score % 10 === 0) {
       speed += 2;
     }
@@ -66,13 +64,16 @@ const loop = setInterval(() => {
     mario.style.width = '75px';
     mario.style.marginLeft = '20px';
 
+
     clearInterval(loop);
 
     scoredisplay.textContent = score;
 
 
+
     setTimeout(() => {
       //window.location.href = './menu.php';
+      hiddenScore.form.submit();
     }, 1000);
   }
 }, speed);

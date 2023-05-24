@@ -9,9 +9,9 @@ $name_ut = $_SESSION["user_first"];
 $score = "<span id=scoreboard></span>";
 
 
-echo "<h1>O seu score é: 
-" . $score . "
-</h1>";
+echo "<h1>O seu score é: $score</h1>";
+
+if(isset($_POST["hidden-score"])) {
 
 
     $query = "SELECT * FROM games WHERE id_gm_ut = '$id_ut'";
@@ -20,6 +20,9 @@ echo "<h1>O seu score é:
 
 
         while ($row = $result2->fetch_assoc()) {
+
+            $score = intval($score);
+            echo $score;
 
             $valor = $row['gm_score'];
 
@@ -34,5 +37,6 @@ echo "<h1>O seu score é:
             }
 
         }
+}
 
 ?>

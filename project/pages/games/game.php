@@ -36,7 +36,7 @@
                     include('./../../control/games/mario.php');
                 ?>
             </div>
-            <input type="number" id="hidden-score" style="visibility: hidden">
+            <input type="submit" id="hidden-score" name="hidden-score" style="visibility: hidden">
         </div>
     </form>
 
