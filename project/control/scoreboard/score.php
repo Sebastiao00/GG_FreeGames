@@ -20,6 +20,7 @@ if(isset($_POST["bt_utilizadores"])){
 
 
     while ($row = $result->fetch_assoc()) {
+        $admin = $row["ut_admin"];
         echo '
         <tr>
         <th>ID</th>
@@ -32,14 +33,13 @@ if(isset($_POST["bt_utilizadores"])){
                 <td class="d-table-cell"><span class="badge rounded-pill badge-soft-danger">' . $row["ut_id"] . '</span></td>
                 <td class="d-table-cell"><span class="badge rounded-pill badge-soft-danger">' . $row["ut_email"] . '</span></td>
                 <td class="d-table-cell"><span class="badge rounded-pill badge-soft-danger">' . $row["ut_first"] . '</span></td>
-                <td class="d-table-cell"><span class="badge rounded-pill badge-soft-danger">' . $row["ut_last"] . '</span></td>
-                <td class="d-table-cell"><span class="badge rounded-pill badge-soft-danger">' . $row["ut_admin"] . '</span></td>
-                </td>
-            </tr>';
-            
-
-
-
+                <td class="d-table-cell"><span class="badge rounded-pill badge-soft-danger">' . $row["ut_last"] . '</span></td>';
+                if($admin != 0) {
+                     echo '<td class="d-table-cell"><span class="badge rounded-pill badge-soft-danger"> Admin </span></td></td></tr>';
+                }
+                else {
+                    echo '<td class="d-table-cell"><span class="badge rounded-pill badge-soft-danger"> Player </span></td></td></tr>';
+                }
     }
 }
 
